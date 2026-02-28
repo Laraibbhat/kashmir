@@ -1,8 +1,8 @@
-name : build_publish
+name: build_publish
 on:
   push:
     branches: [master]
-  
+
 jobs:
   build_publish:
     runs-on: ubuntu-latest
@@ -12,7 +12,7 @@ jobs:
       - name: use node
         uses: actions/setup-node@v4
         with:
-          node-version: '18'
+          node-version: "18"
       - name: install dependencies
         run: npm ci
       - name: build
@@ -24,4 +24,4 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: us-east-1
       - name: deploy to s3
-        run: aws s3 sync build/ s3://kashify-bucket --delete --acl public-read
+        run: aws s3 sync build/ s3://kashify-bucket --delete
