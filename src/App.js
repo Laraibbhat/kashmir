@@ -10,7 +10,7 @@ function App() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          Welcome Laraib Mushtaq to React JS World!
+          Welcome Laraib Mushtaq to React JS World!!
         </a>
       </header>
     </div>
