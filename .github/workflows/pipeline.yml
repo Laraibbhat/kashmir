@@ -24,4 +24,4 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: us-east-1
       - name: deploy to s3
-        run: aws s3 sync build/ s3://kashmir-frontend --delete --acl public-read
+        run: aws s3 sync build/ s3://kashify-bucket --delete --acl public-read
