@@ -1,0 +1,105 @@
+export const resumeData = {
+  name: "LARAIB MUSHTAQ",
+  title: "SENIOR SOFTWARE ENGINEER",
+  email: "lmushtaq10@gmail.com",
+  phone: "+91 7888692130",
+  location: "Pune, India",
+  summary:
+    "Accomplished Senior Software Engineer with 5.5+ years of full-stack engineering expertise across modern web architectures, microservices, cloud platforms. Proven record of optimizing product performance. Expert at bridging complex product goals. AI algorithms, and systems engineering within cross-functional teams.",
+
+  technicalExpertise: {
+    "Languages & Core": [
+      "Java",
+      "Python",
+      "SQL",
+      "JavaScript (ES6+)",
+      "TypeScript",
+      "OOP",
+      "Data Structures (DSA)",
+    ],
+    "Frameworks & Libs": [
+      "React.js",
+      "Node.js",
+      "Spring Boot",
+      "Next.js",
+      "Express",
+      "REST",
+      "Microservices",
+    ],
+    "Cloud & DevOps": [
+      "AWS (Lambda, EC2, Cloud Deployment)",
+      "DevOps, CI/CD",
+      "Pipelines",
+    ],
+    "Databases & Tools": [
+      "MongoDB",
+      "MySQL",
+      "PostgreSQL",
+      "Material UI (MUI)",
+      "System Architecture",
+    ],
+  },
+
+  experience: [
+    {
+      title: "Senior Software Engineer",
+      company: "CYIENT, Pune",
+      period: "Apr 2025 – Present",
+      highlights: [
+        "Engineered core systems enhancing application rendering speeds to boost overall user satisfaction metrics by 30%.",
+        "Architected high-throughput data engineering pipelines for CDOS chemical/agricultural data ingestion, cutting user lag and system AWS costs by 30%.",
+        "Deployed an advanced production-grade AI Fuzzy Logic matching algorithm and automated AI OCR pipeline to effortlessly process vendor invoices and drive immediate asset updates.",
+      ],
+    },
+    {
+      title: "Senior Analyst Developer",
+      company: "BriskRed Systems, Noida",
+      period: "Jan 2025 – Mar 2025",
+      highlights: [
+        "Collaborated with distributed global engineering squads to systematically refine core product offerings based on analytics internally and feedback metrics.",
+      ],
+    },
+    {
+      title: "Senior Software Developer",
+      company: "Team Geeks Solutions, Pune",
+      period: "Jun 2024 – Dec 2024",
+      projectFocus: "Imperial Blu Platform & View 360 Dashboard",
+      highlights: [
+        "Rolled out modern modular dashboard modules resulting in a 50% improvement in active user engagement.",
+        "Built the Imperial Blu framework featuring micro-localized dynamic content routing, lowering dynamic infrastructure hosting expenses by 30%.",
+      ],
+    },
+    {
+      title: "Software Engineer",
+      company: "e-Zest Solution Limited, Pune",
+      period: "Nov 2020 – Jun 2024",
+      projectFocus: "MOSAIC, BD/RBZ Marketplace & HQ Studio Assessment Portal",
+      highlights: [
+        "Scalably designed MOSAIC, a highly resilient internet-based B2B/B2C marketplace engine bridging global traders.",
+        "Co-authored rigorous backend API layers, validation schemas, and automated unit-testing suites reducing production defects.",
+      ],
+    },
+  ],
+
+  education: [
+    {
+      degree: "M.Tech in Computer Science and Engineering",
+      school: "Kashmir University",
+      year: "2022 – 2024",
+      details:
+        "Graduated with 'Distinction'; published research on machine learning within an indexed peer-reviewed journal.",
+    },
+    {
+      degree: "Bachelor of Engineering (B.E.) in Computer Engineering",
+      school: "GCOEARA, Pune University",
+      year: "2016 – 2020",
+      details:
+        "Graduated with a top tier CGPA of 8.3 / 10.0, ranking confidently within the top 10% of the class.",
+    },
+  ],
+
+  awards: [
+    "Smart India Hackathon Winner: Claimed top honors at the highly competitive hackathon circuit at IIT Guwahati.",
+    "Core Focus: Distributed Systems, Deep Learning Topology, Data Structures (DSA), Cloud Automation.",
+  ],
+};
