@@ -79,7 +79,7 @@ const Footer = () => {
               Open to exciting opportunities and collaborations. Let's discuss how I can contribute to your vision.
             </p>
             <motion.a
-              href="mailto:lmushtaq10@gmail.com"
+              href={`mailto:${resumeData.email}`}
               whileHover={{ x: 4 }}
               whileTap={{ x: 0 }}
               className="inline-flex items-center space-x-2 px-4 py-2 border border-gray-700 hover:border-cyan-400 hover:text-cyan-400 rounded text-sm transition"
@@ -107,8 +107,7 @@ const Footer = () => {
           viewport={{ once: true }}
           className="text-center text-gray-500 text-sm space-y-2"
         >
-          <p>© 2024 {resumeData.name}. All rights reserved.</p>
-          <p className="text-xs">Crafted with attention to detail using React, Tailwind CSS & Framer Motion</p>
+          <p>© 2026 {resumeData.name}. All rights reserved.</p>
         </motion.div>
       </div>
     </motion.footer>
