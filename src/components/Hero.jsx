@@ -127,7 +127,7 @@ const Hero = () => {
               <div className="absolute -inset-1 bg-gradient-to-r from-cyan-600 to-blue-600 rounded-xl opacity-30 blur-xl" />
               <div className="absolute -inset-0.5 bg-gradient-to-r from-cyan-500 to-blue-600 rounded-xl opacity-20" />
               <img
-                src="/profile.jpg"
+                src="/photo1.jpeg"
                 alt="Laraib Mushtaq"
                 className="relative rounded-xl shadow-2xl w-full object-cover aspect-[3/4]"
               />
