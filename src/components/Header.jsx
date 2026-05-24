@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
+import { resumeData } from '../resumeData';
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -62,7 +63,9 @@ const Header = () => {
 
           {/* CTA Button */}
           <motion.a
-            href="mailto:lmushtaq10@gmail.com"
+            href={`https://mail.google.com/mail/?view=cm&fs=1&to=${resumeData.email}`}
+            target="_blank"
+            rel="noopener noreferrer"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             className="px-6 py-2 bg-gradient-to-r from-cyan-500 to-blue-600 text-white text-sm font-medium rounded hover:shadow-lg hover:shadow-cyan-500/30 transition-all"

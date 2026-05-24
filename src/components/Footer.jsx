@@ -15,7 +15,7 @@ const Footer = () => {
   const socialLinks = [
     { icon: "💼", label: "LinkedIn", url: "https://www.linkedin.com/in/laraib-bhat" },
     { icon: "🐙", label: "GitHub", url: "https://github.com/laraibbhat" },
-    { icon: "📧", label: "Email", url: `mailto:${resumeData.email}` },
+    { icon: "📧", label: "Email", url: `https://mail.google.com/mail/?view=cm&fs=1&to=${resumeData.email}` },
   ];
 
   return (
@@ -71,7 +71,9 @@ const Footer = () => {
             <h3 className="text-lg font-light text-white mb-6 tracking-wide">Connect</h3>
             <div className="space-y-3 text-sm">
               <a
-                href={`mailto:${resumeData.email}`}
+                href={`https://mail.google.com/mail/?view=cm&fs=1&to=${resumeData.email}`}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="hover:text-cyan-400 transition-colors flex items-center space-x-2 group font-light"
               >
                 <span className="text-gray-500 group-hover:text-cyan-400 transition-colors">→</span>
@@ -98,7 +100,9 @@ const Footer = () => {
               Open to exciting opportunities and partnerships. Let's build something amazing together.
             </p>
             <motion.a
-              href={`mailto:${resumeData.email}`}
+              href={`https://mail.google.com/mail/?view=cm&fs=1&to=${resumeData.email}`}
+              target="_blank"
+              rel="noopener noreferrer"
               whileHover={{ x: 4 }}
               whileTap={{ x: 0 }}
               className="inline-flex items-center space-x-2 px-6 py-3 bg-gradient-to-r from-cyan-500 to-blue-600 text-white rounded font-light hover:shadow-xl hover:shadow-cyan-500/20 transition-all"

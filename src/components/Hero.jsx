@@ -73,7 +73,11 @@ const Hero = () => {
               <div className="space-y-2 text-sm">
                 <div className="flex items-center gap-3 text-gray-400 hover:text-cyan-400 transition-colors">
                   <span className="text-xs tracking-widest">EMAIL</span>
-                  <a href={`mailto:${resumeData.email}`} className="hover:underline">
+                  <a 
+                    href={`https://mail.google.com/mail/?view=cm&fs=1&to=${resumeData.email}`} 
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="hover:underline">
                     {resumeData.email}
                   </a>
                 </div>
@@ -103,7 +107,9 @@ const Hero = () => {
                 Explore My Work
               </motion.a>
               <motion.a
-                href={`mailto:${resumeData.email}`}
+                href={`https://mail.google.com/mail/?view=cm&fs=1&to=${resumeData.email}`}
+                target="_blank"
+                rel="noopener noreferrer"
                 whileHover={{ x: 5 }}
                 whileTap={{ x: 0 }}
                 className="px-8 py-3 border border-gray-600 text-white font-medium rounded hover:border-cyan-400 hover:text-cyan-400 transition-all"
