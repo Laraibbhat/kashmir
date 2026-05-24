@@ -25,3 +25,7 @@ jobs:
           aws-region: us-east-1
       - name: deploy to s3
         run: aws s3 sync build/ s3://kashify-bucket --delete
+
+      # Added step to clear CloudFront cache automatically
+      - name: invalidate cloudfront cache
+        run: aws cloudfront create-invalidation --distribution-id EK4DD3AWUFG5X --paths "/*"
