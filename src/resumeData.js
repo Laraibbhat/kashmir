@@ -53,7 +53,7 @@ export const resumeData = {
     },
     {
       title: "Senior Analyst Developer",
-      company: "BriskRed Systems, Noida",
+      company: "BricksRed Systems, Noida",
       period: "Jan 2025 – Mar 2025",
       highlights: [
         "Collaborated with distributed global engineering squads to systematically refine core product offerings based on analytics internally and feedback metrics.",
