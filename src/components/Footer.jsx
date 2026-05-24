@@ -13,8 +13,8 @@ const Footer = () => {
   };
 
   const socialLinks = [
-    { icon: "💼", label: "LinkedIn", url: "https://linkedin.com" },
-    { icon: "🐙", label: "GitHub", url: "https://github.com" },
+    { icon: "💼", label: "LinkedIn", url: "https://www.linkedin.com/in/laraib-bhat" },
+    { icon: "🐙", label: "GitHub", url: "https://github.com/laraibbhat" },
     { icon: "📧", label: "Email", url: `mailto:${resumeData.email}` },
   ];
 
@@ -145,7 +145,7 @@ const Footer = () => {
             className="flex flex-col sm:flex-row items-center gap-4 text-xs text-gray-500 font-light"
           >
             <div className="h-px w-8 bg-slate-700 hidden sm:block" />
-            <span>© 2024 Laraib Mushtaq. All rights reserved.</span>
+            <span>© {new Date().getFullYear()} Laraib Mushtaq. All rights reserved.</span>
             <div className="h-px w-8 bg-slate-700 hidden sm:block" />
           </motion.div>
         </motion.div>
