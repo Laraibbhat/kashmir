@@ -28,7 +28,7 @@ const Hero = () => {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 1.2 }}
-      className="relative min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-800 text-white pt-32 pb-20 overflow-hidden"
+      className="relative min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-800 text-white pt-40 pb-20 overflow-hidden"
     >
       {/* Subtle Background Effect */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">

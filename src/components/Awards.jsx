@@ -38,10 +38,29 @@ const Awards = () => {
           viewport={{ once: true }}
           className="space-y-4 mb-16"
         >
-          <h2 className="text-5xl font-light text-white tracking-tight">
-            Awards & Honors
-          </h2>
-          <div className="h-1 w-20 bg-gradient-to-r from-cyan-400 to-blue-500" />
+          <div className="flex items-end justify-between">
+            <div className="space-y-4 flex-1">
+              <h2 className="text-5xl font-light text-white tracking-tight">
+                Awards & Recognition
+              </h2>
+              <div className="h-1 w-20 bg-gradient-to-r from-cyan-400 to-blue-500" />
+            </div>
+            <motion.div
+              initial={{ scale: 0 }}
+              whileInView={{ scale: 1 }}
+              transition={{ delay: 0.3 }}
+              viewport={{ once: true }}
+              className="flex flex-col items-center ml-8"
+            >
+              <div className="text-4xl font-light bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">
+                {resumeData.awards.length}
+              </div>
+              <span className="text-xs text-gray-400 mt-1">Awards</span>
+            </motion.div>
+          </div>
+          <p className="text-gray-400 font-light text-lg">
+            Recognition for excellence and innovation in the field
+          </p>
         </motion.div>
 
         <motion.div
@@ -56,12 +75,20 @@ const Awards = () => {
               key={idx}
               variants={itemVariants}
               whileHover={{ x: 8 }}
-              className="bg-slate-900 border border-slate-700 hover:border-cyan-500 p-8 rounded-lg transition-all duration-300 flex items-start gap-4"
+              className="relative bg-gradient-to-r from-slate-900 to-slate-950 border border-slate-700 hover:border-cyan-500 p-8 rounded-lg transition-all duration-300 flex items-start gap-6 group overflow-hidden"
             >
-              <div className="flex-shrink-0 pt-1">
-                <span className="text-2xl">✦</span>
-              </div>
-              <p className="text-gray-300 leading-relaxed font-light">{award}</p>
+              {/* Glow on Hover */}
+              <div className="absolute -top-1 -right-1 w-20 h-20 bg-gradient-to-br from-cyan-500/20 to-blue-500/20 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-xl" />
+
+              <motion.div
+                whileHover={{ scale: 1.1 }}
+                className="flex-shrink-0 w-10 h-10 rounded-full bg-gradient-to-br from-cyan-500 to-blue-600 flex items-center justify-center text-sm font-bold text-white relative z-10"
+              >
+                {idx + 1}
+              </motion.div>
+              <p className="text-gray-300 leading-relaxed font-light text-sm group-hover:text-gray-200 transition-colors relative z-10 pt-1">
+                {award}
+              </p>
             </motion.div>
           ))}
         </motion.div>

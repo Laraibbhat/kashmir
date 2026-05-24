@@ -19,6 +19,7 @@ body {
     "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background: linear-gradient(180deg, #0f172a 0%, #1e293b 100%);
 }
 
 code {
@@ -26,20 +27,43 @@ code {
     source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
 }
 
-/* Custom scrollbar */
+/* Custom scrollbar - Dark Theme */
 ::-webkit-scrollbar {
   width: 10px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #f1f1f1;
+  background: #0f172a;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #3b82f6;
+  background: linear-gradient(180deg, #06b6d4 0%, #0ea5e9 100%);
   border-radius: 5px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #1e40af;
+  background: linear-gradient(180deg, #0ea5e9 0%, #3b82f6 100%);
+}
+
+/* Selection styling */
+::selection {
+  background: linear-gradient(90deg, #06b6d4 0%, #0ea5e9 100%);
+  color: #0f172a;
+}
+
+/* Smooth animations */
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+/* Base button styling */
+button {
+  transition: all 0.3s ease;
+}
+
+/* Link styling */
+a {
+  text-decoration: none;
 }
