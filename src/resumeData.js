@@ -7,6 +7,23 @@ export const resumeData = {
   summary:
     "Accomplished Senior Software Engineer with 5.5+ years of full-stack engineering expertise across modern web architectures, microservices, cloud platforms. Proven record of optimizing product performance. Expert at bridging complex product goals. AI algorithms, and systems engineering within cross-functional teams.",
 
+  aboutDescription: "Beyond technical prowess, I bring a strategic mindset to every project. I don't just write code—I architect solutions that scale with businesses, reduce operational costs, and drive user engagement. My approach combines deep technical expertise with business acumen to deliver transformative results.",
+  impactResults: [
+    "Optimized system performance by 30%, directly improving user satisfaction metrics and reducing infrastructure costs",
+    "Architected microservices pipelines handling high-throughput data ingestion, cutting cloud expenses and latency significantly",
+    "Led cross-functional teams to deliver 15+ enterprise products with measurable business impact",
+    "Deployed AI/ML solutions that automated manual processes and enhanced decision-making capabilities"
+  ],
+  philosophy: "Excellence is not about perfection—it's about continuous improvement, learning from failures, and adapting to challenges. I believe in writing clean, maintainable code, fostering collaborative teams, and always keeping user needs at the center of solution design.",
+  coreStrengths: [
+    "Full-Stack Development & Architecture",
+    "Cloud Infrastructure & DevOps",
+    "System Design & Scalability",
+    "Performance Optimization",
+    "Team Leadership & Mentoring",
+    "Agile & Rapid Prototyping",
+  ],
+
   technicalExpertise: {
     "Languages & Core": [
       "Java",

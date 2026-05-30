@@ -1,8 +1,11 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { resumeData } from '../resumeData';
 
-const Skills = () => {
+const Skills = ({ data }) => {
+  const hasExpertise = data?.technicalExpertise && Object.keys(data.technicalExpertise).length > 0;
+  const hasCompetencies = data?.coreCompetencies && data.coreCompetencies.length > 0;
+  if (!hasExpertise && !hasCompetencies) return null;
+
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -98,7 +101,7 @@ const Skills = () => {
             variants={containerVariants}
             className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"
           >
-            {Object.entries(resumeData.technicalExpertise).map((category, idx) => {
+            {Object.entries(data.technicalExpertise || {}).map((category, idx) => {
               const config = getCategoryConfig(category[0]);
               return (
                 <motion.div
@@ -166,7 +169,7 @@ const Skills = () => {
               Core Competencies
             </h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              {resumeData.coreCompetencies.map((comp, idx) => (
+              {data.coreCompetencies?.map((comp, idx) => (
                 <motion.div
                   key={idx}
                   initial={{ opacity: 0, x: -20 }}

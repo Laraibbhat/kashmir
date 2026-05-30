@@ -1,8 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { resumeData } from '../resumeData';
 
-const Hero = () => {
+const Hero = ({ data }) => {
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -50,7 +49,7 @@ const Hero = () => {
                 variants={itemVariants}
                 className="text-6xl lg:text-7xl font-light tracking-tight text-white leading-tight"
               >
-                {resumeData.name.split(' ').map((word, idx) => (
+                {data?.name?.split(' ').map((word, idx) => (
                   <div key={idx}>{word}</div>
                 ))}
               </motion.h1>
@@ -59,13 +58,13 @@ const Hero = () => {
             <motion.div variants={itemVariants} className="flex items-center gap-2">
               <div className="h-1 w-16 bg-gradient-to-r from-cyan-400 to-blue-500 rounded-full" />
               <span className="text-xl font-light text-cyan-400 tracking-wide">
-                {resumeData.title}
+                {data?.title}
               </span>
             </motion.div>
 
             <motion.div variants={itemVariants} className="space-y-4 text-gray-300">
               <p className="text-lg leading-relaxed font-light">
-                {resumeData.summary}
+                {data?.summary}
               </p>
             </motion.div>
 
@@ -74,22 +73,22 @@ const Hero = () => {
                 <div className="flex items-center gap-3 text-gray-400 hover:text-cyan-400 transition-colors">
                   <span className="text-xs tracking-widest">EMAIL</span>
                   <a 
-                    href={`https://mail.google.com/mail/?view=cm&fs=1&to=${resumeData.email}`} 
+                    href={`https://mail.google.com/mail/?view=cm&fs=1&to=${data?.email}`} 
                     target="_blank"
                     rel="noopener noreferrer"
                     className="hover:underline">
-                    {resumeData.email}
+                    {data?.email}
                   </a>
                 </div>
                 <div className="flex items-center gap-3 text-gray-400 hover:text-cyan-400 transition-colors">
                   <span className="text-xs tracking-widest">PHONE</span>
-                  <a href={`tel:${resumeData.phone}`} className="hover:underline">
-                    {resumeData.phone}
+                  <a href={`tel:${data?.phone}`} className="hover:underline">
+                    {data?.phone}
                   </a>
                 </div>
                 <div className="flex items-center gap-3 text-gray-400">
                   <span className="text-xs tracking-widest">LOCATION</span>
-                  <span>{resumeData.location}</span>
+                  <span>{data?.location}</span>
                 </div>
               </div>
             </motion.div>
@@ -107,7 +106,7 @@ const Hero = () => {
                 Explore My Work
               </motion.a>
               <motion.a
-                href={`https://mail.google.com/mail/?view=cm&fs=1&to=${resumeData.email}`}
+                href={`https://mail.google.com/mail/?view=cm&fs=1&to=${data?.email}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 whileHover={{ x: 5 }}

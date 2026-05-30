@@ -1,8 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { resumeData } from '../resumeData';
 
-const Footer = () => {
+const Footer = ({ data }) => {
   const itemVariants = {
     hidden: { opacity: 0, y: 20 },
     visible: {
@@ -15,7 +14,7 @@ const Footer = () => {
   const socialLinks = [
     { icon: "💼", label: "LinkedIn", url: "https://www.linkedin.com/in/laraib-bhat" },
     { icon: "🐙", label: "GitHub", url: "https://github.com/laraibbhat" },
-    { icon: "📧", label: "Email", url: `https://mail.google.com/mail/?view=cm&fs=1&to=${resumeData.email}` },
+    { icon: "📧", label: "Email", url: `https://mail.google.com/mail/?view=cm&fs=1&to=${data?.email}` },
   ];
 
   return (
@@ -36,7 +35,7 @@ const Footer = () => {
           {/* Brand */}
           <motion.div variants={itemVariants} className="space-y-4">
             <h3 className="text-lg font-light text-white mb-6 tracking-wide">
-              {resumeData.name.split(' ')[0]}
+              {data?.name?.split(' ')[0]}
             </h3>
             <p className="text-gray-500 text-sm leading-relaxed font-light">
               Senior Software Engineer crafting elegant solutions to complex problems.
@@ -71,24 +70,24 @@ const Footer = () => {
             <h3 className="text-lg font-light text-white mb-6 tracking-wide">Connect</h3>
             <div className="space-y-3 text-sm">
               <a
-                href={`https://mail.google.com/mail/?view=cm&fs=1&to=${resumeData.email}`}
+                href={`https://mail.google.com/mail/?view=cm&fs=1&to=${data?.email}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="hover:text-cyan-400 transition-colors flex items-center space-x-2 group font-light"
               >
                 <span className="text-gray-500 group-hover:text-cyan-400 transition-colors">→</span>
-                <span>{resumeData.email}</span>
+                <span>{data?.email}</span>
               </a>
               <a
-                href={`tel:${resumeData.phone}`}
+                href={`tel:${data?.phone}`}
                 className="hover:text-cyan-400 transition-colors flex items-center space-x-2 group font-light"
               >
                 <span className="text-gray-500 group-hover:text-cyan-400 transition-colors">→</span>
-                <span>{resumeData.phone}</span>
+                <span>{data?.phone}</span>
               </a>
               <div className="flex items-center space-x-2 text-sm font-light">
                 <span className="text-gray-500">→</span>
-                <span>{resumeData.location}</span>
+                <span>{data?.location}</span>
               </div>
             </div>
           </motion.div>
@@ -100,7 +99,7 @@ const Footer = () => {
               Open to exciting opportunities and partnerships. Let's build something amazing together.
             </p>
             <motion.a
-              href={`https://mail.google.com/mail/?view=cm&fs=1&to=${resumeData.email}`}
+              href={`https://mail.google.com/mail/?view=cm&fs=1&to=${data?.email}`}
               target="_blank"
               rel="noopener noreferrer"
               whileHover={{ x: 4 }}
@@ -149,7 +148,7 @@ const Footer = () => {
             className="flex flex-col sm:flex-row items-center gap-4 text-xs text-gray-500 font-light"
           >
             <div className="h-px w-8 bg-slate-700 hidden sm:block" />
-            <span>© {new Date().getFullYear()} Laraib Mushtaq. All rights reserved.</span>
+            <span>© {new Date().getFullYear()} {data?.name}. All rights reserved.</span>
             <div className="h-px w-8 bg-slate-700 hidden sm:block" />
           </motion.div>
         </motion.div>

@@ -36,13 +36,13 @@ function ProfilePage({ defaultUsername }) {
       <Header data={profile} />
       <Hero data={profile} />
       <About data={profile} />
-      <Skills data={profile.technicalExpertise} />
+      <Skills data={profile} />
       <Experience data={profile.experiences} />
       <Education data={profile.educations} />
       <Certifications data={profile.certifications} />
       <Publications data={profile.publications} />
       <Awards data={profile.awards} />
-      <Footer />
+      <Footer data={profile} />
     </div>
   );
 }

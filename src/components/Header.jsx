@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { resumeData } from '../resumeData';
 
-const Header = () => {
+const Header = ({ data }) => {
   const [isScrolled, setIsScrolled] = useState(false);
 
   React.useEffect(() => {
@@ -63,7 +62,7 @@ const Header = () => {
 
           {/* CTA Button */}
           <motion.a
-            href={`https://mail.google.com/mail/?view=cm&fs=1&to=${resumeData.email}`}
+            href={`https://mail.google.com/mail/?view=cm&fs=1&to=${data?.email}`}
             target="_blank"
             rel="noopener noreferrer"
             whileHover={{ scale: 1.05 }}

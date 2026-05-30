@@ -1,8 +1,9 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { resumeData } from '../resumeData';
 
-const Experience = () => {
+const Experience = ({ data }) => {
+  if (!data || data.length === 0) return null;
+
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -54,7 +55,7 @@ const Experience = () => {
               className="flex flex-col items-center ml-8"
             >
               <div className="text-4xl font-light bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">
-                {resumeData.experience.length}
+                {data.length}
               </div>
               <span className="text-xs text-gray-400 mt-1">Positions</span>
             </motion.div>
@@ -71,7 +72,7 @@ const Experience = () => {
           viewport={{ once: true }}
           className="space-y-8"
         >
-          {resumeData.experience.map((job, idx) => (
+          {data.map((job, idx) => (
             <motion.div
               key={idx}
               variants={itemVariants}
