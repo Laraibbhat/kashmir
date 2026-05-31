@@ -2,11 +2,49 @@ import React from 'react';
 import { motion } from 'framer-motion';
 
 const Skills = ({ data }) => {
-  const hasExpertise = data?.technicalExpertise && Object.keys(data.technicalExpertise).length > 0;
+  const expertise = (() => {
+    const raw = data?.technicalExpertise;
+    if (!raw) return {};
+
+    if (Array.isArray(raw)) {
+      return raw.reduce((acc, curr) => {
+        const category = curr?.category?.trim() || "Other";
+        const skill = curr?.skill || curr?.name || curr?.title || "";
+        if (!acc[category]) acc[category] = [];
+        if (skill && !acc[category].includes(skill)) acc[category].push(skill);
+        return acc;
+      }, {});
+    }
+
+    if (typeof raw === "object") {
+      return Object.entries(raw).reduce((acc, [key, value]) => {
+        if (Array.isArray(value)) {
+          acc[key] = value
+            .map((item) => {
+              if (typeof item === "string") return item;
+              if (item && typeof item === "object") return item.skill || item.name || item.title || "";
+              return String(item || "");
+            })
+            .filter(Boolean);
+        } else if (typeof value === "string") {
+          acc[key] = [value];
+        } else if (value && typeof value === "object") {
+          acc[key] = [value.skill || value.name || value.title || ""].filter(Boolean);
+        } else {
+          acc[key] = [];
+        }
+        return acc;
+      }, {});
+    }
+
+    return {};
+  })();
+
+  const hasExpertise = Object.keys(expertise).length > 0;
   const hasCompetencies = data?.coreCompetencies && data.coreCompetencies.length > 0;
   if (!hasExpertise && !hasCompetencies) return null;
 
-  const totalSkills = Object.values(data.technicalExpertise || {}).reduce(
+  const totalSkills = Object.values(expertise).reduce(
     (acc, skills) => acc + (Array.isArray(skills) ? skills.length : 0),
     0
   );
@@ -106,7 +144,7 @@ const Skills = ({ data }) => {
             variants={containerVariants}
             className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"
           >
-            {Object.entries(data.technicalExpertise || {}).map((category, idx) => {
+            {Object.entries(expertise).map((category, idx) => {
               const config = getCategoryConfig(category[0]);
               return (
                 <motion.div

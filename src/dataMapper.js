@@ -61,14 +61,48 @@ export const mapProfileData = (apiData) => {
       .sort((a, b) => (a.displayOrder || 0) - (b.displayOrder || 0)),
 
     // Group the flat technical expertise array into categorized objects
-    technicalExpertise: Array.isArray(apiData.technicalExpertise)
-      ? apiData.technicalExpertise.reduce((acc, curr) => {
-          if (!acc[curr.category]) acc[curr.category] = [];
-          if (!acc[curr.category].includes(curr.skill))
-            acc[curr.category].push(curr.skill);
+    technicalExpertise: (() => {
+      const raw = apiData.technicalExpertise;
+      if (!raw) return {};
+
+      if (Array.isArray(raw)) {
+        return raw.reduce((acc, curr) => {
+          const category = curr?.category?.trim() || "Other";
+          const skill = curr?.skill || curr?.name || curr?.title || "";
+          if (!acc[category]) acc[category] = [];
+          if (skill && !acc[category].includes(skill)) {
+            acc[category].push(skill);
+          }
           return acc;
-        }, {})
-      : apiData.technicalExpertise,
+        }, {});
+      }
+
+      if (typeof raw === "object") {
+        return Object.entries(raw).reduce((acc, [key, value]) => {
+          if (Array.isArray(value)) {
+            acc[key] = value
+              .map((item) => {
+                if (typeof item === "string") return item;
+                if (item && typeof item === "object")
+                  return item.skill || item.name || item.title || "";
+                return String(item || "");
+              })
+              .filter(Boolean);
+          } else if (typeof value === "string") {
+            acc[key] = [value];
+          } else if (value && typeof value === "object") {
+            acc[key] = [value.skill || value.name || value.title || ""].filter(
+              Boolean,
+            );
+          } else {
+            acc[key] = [];
+          }
+          return acc;
+        }, {});
+      }
+
+      return {};
+    })(),
 
     // Map metrics from top-level fields into the nested metrics object
     metrics: apiData.metrics || {
