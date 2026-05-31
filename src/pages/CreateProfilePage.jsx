@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { useProfile } from "../context/ProfileContext";
 import Footer from "../components/Footer";
@@ -29,6 +30,12 @@ const steps = [
     description: "Wrap up with certifications, publications, awards, and competencies.",
   },
 ];
+
+const stepVariants = {
+  initial: { opacity: 0, y: 24, scale: 0.98 },
+  animate: { opacity: 1, y: 0, scale: 1 },
+  exit: { opacity: 0, y: -16, scale: 0.98 },
+};
 
 function CreateProfilePage() {
   const navigate = useNavigate();
@@ -216,7 +223,6 @@ function CreateProfilePage() {
                   className="w-full px-4 py-3 rounded-2xl bg-slate-900 border border-slate-700 text-white focus:ring-2 focus:ring-cyan-500"
                 />
               </label>
-
               <label className="space-y-2">
                 <span className="text-sm font-medium text-slate-300">Full Name *</span>
                 <input
@@ -242,7 +248,6 @@ function CreateProfilePage() {
                   className="w-full px-4 py-3 rounded-2xl bg-slate-900 border border-slate-700 text-white focus:ring-2 focus:ring-cyan-500"
                 />
               </label>
-
               <label className="space-y-2">
                 <span className="text-sm font-medium text-slate-300">Email</span>
                 <input
@@ -268,7 +273,6 @@ function CreateProfilePage() {
                   className="w-full px-4 py-3 rounded-2xl bg-slate-900 border border-slate-700 text-white focus:ring-2 focus:ring-cyan-500"
                 />
               </label>
-
               <label className="space-y-2">
                 <span className="text-sm font-medium text-slate-300">Location</span>
                 <input
@@ -715,12 +719,7 @@ function CreateProfilePage() {
                 ))}
                 <button
                   type="button"
-                  onClick={() => addListItem("certifications", {
-                    name: "",
-                    issuer: "",
-                    certificationDate: "",
-                    description: "",
-                  })}
+                  onClick={() => addListItem("certifications", { name: "", issuer: "", certificationDate: "", description: "" })}
                   className="inline-flex items-center gap-2 px-5 py-3 rounded-full bg-cyan-500 text-slate-950 font-semibold shadow-lg shadow-cyan-500/20 hover:bg-cyan-400"
                 >
                   Add Certification
@@ -774,12 +773,7 @@ function CreateProfilePage() {
                 ))}
                 <button
                   type="button"
-                  onClick={() => addListItem("publications", {
-                    title: "",
-                    journal: "",
-                    publicationDate: "",
-                    description: "",
-                  })}
+                  onClick={() => addListItem("publications", { title: "", journal: "", publicationDate: "", description: "" })}
                   className="inline-flex items-center gap-2 px-5 py-3 rounded-full bg-cyan-500 text-slate-950 font-semibold shadow-lg shadow-cyan-500/20 hover:bg-cyan-400"
                 >
                   Add Publication
@@ -862,7 +856,12 @@ function CreateProfilePage() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100 py-12 px-4">
+    <motion.div
+      className="min-h-screen bg-slate-950 text-slate-100 py-12 px-4"
+      initial={{ opacity: 0, y: 18 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.45, ease: "easeOut" }}
+    >
       <div className="max-w-6xl mx-auto space-y-8">
         <div className="rounded-[2rem] border border-slate-700 bg-gradient-to-br from-slate-900 via-slate-950 to-slate-900 p-8 shadow-2xl shadow-slate-950/40">
           <div className="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
@@ -871,10 +870,27 @@ function CreateProfilePage() {
               <h1 className="text-4xl sm:text-5xl font-extrabold tracking-tight text-white">Build a profile that feels alive.</h1>
               <p className="max-w-3xl text-slate-400">Move through the sections one page at a time, add details that matter, and create a professional payload ready to submit to your backend.</p>
             </div>
-            <div className="rounded-full bg-slate-900 px-6 py-4 ring-1 ring-slate-700 text-center">
-              <p className="text-sm uppercase text-slate-400">Step</p>
-              <p className="text-3xl font-bold text-cyan-300">{step + 1} / {steps.length}</p>
-              <p className="text-sm text-slate-500 mt-1">{steps[step].title}</p>
+            <div className="grid gap-4 sm:grid-cols-2">
+              <motion.div
+                initial={{ opacity: 0, x: 14 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.45, ease: "easeOut" }}
+                className="rounded-3xl bg-slate-900/90 px-6 py-5 ring-1 ring-cyan-500/10 shadow-lg shadow-cyan-500/10"
+              >
+                <p className="text-sm uppercase tracking-[0.3em] text-cyan-400">Designed for architects</p>
+                <p className="mt-3 text-2xl font-semibold text-white">Smart. Clear. Impactful.</p>
+                <p className="mt-2 text-sm text-slate-400">This flow is structured for any roles and for any domain.</p>
+              </motion.div>
+              <motion.div
+                initial={{ opacity: 0, x: 14 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.45, ease: "easeOut", delay: 0.06 }}
+                className="rounded-3xl bg-slate-900/90 px-6 py-5 ring-1 ring-slate-700 shadow-lg shadow-slate-950/20"
+              >
+                <p className="text-sm uppercase tracking-[0.3em] text-slate-400">Current step</p>
+                <p className="mt-3 text-3xl font-semibold text-cyan-300">{step + 1} / {steps.length}</p>
+                <p className="mt-2 text-sm text-slate-400">{steps[step].title}</p>
+              </motion.div>
             </div>
           </div>
 
@@ -890,7 +906,7 @@ function CreateProfilePage() {
                   ))}
                 </div>
               </div>
-              <div className="h-2 rounded-full bg-slate-800 overflow-hidden">
+              <div className="h-2 rounded-full bg-slate-800 overflow-hidden mt-4">
                 <div className="h-full bg-cyan-400 transition-all duration-500" style={{ width: `${((step + 1) / steps.length) * 100}%` }} />
               </div>
             </div>
@@ -902,7 +918,19 @@ function CreateProfilePage() {
             )}
 
             <form onSubmit={handleSubmit} className="space-y-8">
-              {renderStepContent()}
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={step}
+                  variants={stepVariants}
+                  initial="initial"
+                  animate="animate"
+                  exit="exit"
+                  transition={{ duration: 0.35, ease: "easeOut" }}
+                  className="rounded-3xl bg-slate-950/95 border border-slate-700 p-8 shadow-xl shadow-slate-950/20"
+                >
+                  {renderStepContent()}
+                </motion.div>
+              </AnimatePresence>
 
               <div className="flex flex-col gap-4 sm:flex-row sm:justify-between items-stretch">
                 <button
@@ -948,7 +976,7 @@ function CreateProfilePage() {
       </div>
 
       <Footer />
-    </div>
+    </motion.div>
   );
 }
 
