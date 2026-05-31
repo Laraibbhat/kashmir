@@ -38,7 +38,7 @@ const Footer = ({ data }) => {
               {data?.name?.split(' ')[0]}
             </h3>
             <p className="text-gray-500 text-sm leading-relaxed font-light">
-              Senior Software Engineer crafting elegant solutions to complex problems.
+              {data?.title || "Professional"} crafting elegant solutions to complex problems.
             </p>
           </motion.div>
 

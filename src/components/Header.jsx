@@ -42,7 +42,12 @@ const Header = ({ data }) => {
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
-            LM
+            {data?.name
+              ? data.name
+                  .split(" ")
+                  .map((n) => n[0])
+                  .join("")
+              : "LM"}
           </motion.a>
 
           {/* Navigation Items - Desktop */}

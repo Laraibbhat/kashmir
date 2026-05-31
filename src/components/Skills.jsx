@@ -6,6 +6,11 @@ const Skills = ({ data }) => {
   const hasCompetencies = data?.coreCompetencies && data.coreCompetencies.length > 0;
   if (!hasExpertise && !hasCompetencies) return null;
 
+  const totalSkills = Object.values(data.technicalExpertise || {}).reduce(
+    (acc, skills) => acc + (Array.isArray(skills) ? skills.length : 0),
+    0
+  );
+
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -92,7 +97,7 @@ const Skills = ({ data }) => {
             </h2>
             <div className="h-1 w-20 bg-gradient-to-r from-cyan-400 to-blue-500" />
             <p className="text-gray-400 font-light text-lg">
-              Full-stack expertise spanning 25+ technologies across modern web and cloud architecture
+              Expertise spanning {totalSkills}+ technologies across modern architecture
             </p>
           </motion.div>
 
@@ -250,7 +255,7 @@ const Skills = ({ data }) => {
                   Tech Stack Diversity
                 </h4>
                 <p className="text-gray-400 font-light">
-                  Proficient across 25+ technologies spanning frontend, backend, cloud, and DevOps
+                  Proficient across {totalSkills}+ technologies spanning multiple technical domains
                 </p>
               </div>
               <motion.div
@@ -261,7 +266,7 @@ const Skills = ({ data }) => {
                 className="flex items-center justify-center"
               >
                 <div className="text-5xl font-light bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">
-                  25+
+                  {totalSkills}+
                 </div>
               </motion.div>
             </div>

@@ -133,7 +133,7 @@ const Hero = ({ data }) => {
               <div className="absolute -inset-0.5 bg-gradient-to-r from-cyan-500 to-blue-600 rounded-xl opacity-20" />
               <img
                 src="/profilePhoto.jpeg"
-                alt="Laraib Mushtaq"
+                alt={data?.name || "Profile Photo"}
                 className="relative rounded-xl shadow-2xl w-full object-cover aspect-[3/4]"
               />
             </motion.div>
