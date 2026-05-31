@@ -51,7 +51,7 @@ export const ProfileProvider = ({ children }) => {
     setError(null);
     try {
       const response = await axios.post(
-        `http://localhost:8080/api/profiles`,
+        `http://localhost:8080/api/users`,
         profilePayload,
         { headers: { "Content-Type": "application/json" } }
       );
