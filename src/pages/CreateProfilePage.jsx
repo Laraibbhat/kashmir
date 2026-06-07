@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { useProfile } from "../context/ProfileContext";
@@ -37,6 +37,9 @@ const stepVariants = {
   exit: { opacity: 0, y: -16, scale: 0.98 },
 };
 
+// Change this to your backend URL
+const API_BASE_URL = "http://localhost:8080";
+
 function CreateProfilePage() {
   const navigate = useNavigate();
   const { createProfile, loading, error } = useProfile();
@@ -63,13 +66,123 @@ function CreateProfilePage() {
     publications: [],
     awards: [],
     coreCompetencies: [],
+    avatarKey: null,
+    avatarUrl: null,
   });
+
+  const [avatarPreview, setAvatarPreview] = useState(null);
+  const [uploadingAvatar, setUploadingAvatar] = useState(false);
+
+  useEffect(() => {
+    return () => {
+      if (avatarPreview) URL.revokeObjectURL(avatarPreview);
+    };
+  }, [avatarPreview]);
 
   const [validationError, setValidationError] = useState("");
 
   const setFieldValue = (name, value) => {
     setFormData((prev) => ({ ...prev, [name]: value }));
     setValidationError("");
+  };
+
+  // Resize image client-side to reduce upload size (keeps free-tier costs low)
+  const resizeImage = (file, maxSize = 800, quality = 0.8) =>
+    new Promise((resolve, reject) => {
+      const img = new Image();
+      const url = URL.createObjectURL(file);
+      img.onload = () => {
+        let { width, height } = img;
+        if (width > maxSize || height > maxSize) {
+          if (width > height) {
+            height = Math.round((height * maxSize) / width);
+            width = maxSize;
+          } else {
+            width = Math.round((width * maxSize) / height);
+            height = maxSize;
+          }
+        }
+        const canvas = document.createElement('canvas');
+        canvas.width = width;
+        canvas.height = height;
+        const ctx = canvas.getContext('2d');
+        ctx.drawImage(img, 0, 0, width, height);
+        canvas.toBlob(
+          (blob) => {
+            URL.revokeObjectURL(url);
+            if (blob) resolve(blob);
+            else reject(new Error('Failed to convert image'));
+          },
+          'image/jpeg',
+          quality,
+        );
+      };
+      img.onerror = (err) => {
+        URL.revokeObjectURL(url);
+        reject(err);
+      };
+      img.src = url;
+    });
+
+  const getFileExt = (name = '') => {
+    const parts = name.split('.');
+    return parts.length > 1 ? parts.pop().toLowerCase() : '';
+  };
+
+  const uploadToPresigned = async (fileBlob, filename, contentType) => {
+    // Request presigned URL from backend
+    const presignResp = await fetch(`${API_BASE_URL}/api/uploads/presign`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ filename, contentType }),
+    });
+    if (!presignResp.ok) throw new Error('Failed to get presigned URL');
+    const presignData = await presignResp.json();
+    const { uploadUrl, key } = presignData;
+
+    // Upload directly to S3 using signed URL
+    const putResp = await fetch(uploadUrl, {
+      method: 'PUT',
+      headers: { 'Content-Type': contentType },
+      body: fileBlob,
+    });
+    if (!putResp.ok) throw new Error('Failed to upload to storage');
+
+    // For new profile creation, we don't need a separate association call.
+    // We return the key so it can be sent in the final handleSubmit 
+    // along with the rest of the profile data.
+    return { key };
+  };
+
+  const handleAvatarChange = async (e) => {
+    const file = e.target.files && e.target.files[0];
+    if (!file) return;
+    if (!file.type.startsWith('image/')) {
+      setValidationError('Please upload an image file');
+      return;
+    }
+
+    setUploadingAvatar(true);
+    setValidationError('');
+    try {
+      const ext = getFileExt(file.name) || 'jpg';
+      const resizedBlob = await resizeImage(file, 600, 0.8);
+      const filename = `${formData.username || 'anon'}-${Date.now()}.${ext}`;
+      const contentType = 'image/jpeg';
+
+      // show preview immediately
+      const previewUrl = URL.createObjectURL(resizedBlob);
+      setAvatarPreview(previewUrl);
+
+      const { key } = await uploadToPresigned(resizedBlob, filename, contentType);
+      setFieldValue('avatarKey', key);
+      setFieldValue('avatarUrl', previewUrl);
+    } catch (err) {
+      console.error(err);
+      setValidationError('Avatar upload failed. Try again.');
+    } finally {
+      setUploadingAvatar(false);
+    }
   };
 
   const addListItem = (key, template = {}) => {
@@ -196,6 +309,8 @@ function CreateProfilePage() {
       publications: buildDisplayOrderedList(formData.publications),
       awards: buildDisplayOrderedList(formData.awards),
       coreCompetencies: buildDisplayOrderedList(formData.coreCompetencies),
+      avatarKey: formData.avatarKey || null,
+      avatarUrl: formData.avatarUrl || null,
     };
 
     const result = await createProfile(payload);
@@ -211,6 +326,23 @@ function CreateProfilePage() {
       case 0:
         return (
           <div className="space-y-6">
+            <div className="flex items-center gap-6">
+              <div className="flex-shrink-0">
+                <div className="h-28 w-28 rounded-full overflow-hidden bg-slate-800 flex items-center justify-center">
+                  {avatarPreview || formData.avatarUrl ? (
+                    <img src={avatarPreview || formData.avatarUrl} alt="avatar" className="h-full w-full object-cover" />
+                  ) : (
+                    <span className="text-slate-500">No avatar</span>
+                  )}
+                </div>
+              </div>
+              <div className="flex flex-col gap-2">
+                <label className="text-sm text-slate-300">Profile picture</label>
+                <input type="file" accept="image/*" onChange={handleAvatarChange} />
+                {uploadingAvatar && <span className="text-sm text-slate-400">Uploading...</span>}
+                <p className="text-xs text-slate-500">Recommended: square image. Client-side resized to save bandwidth.</p>
+              </div>
+            </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
               <label className="space-y-2">
                 <span className="text-sm font-medium text-slate-300">Username *</span>
