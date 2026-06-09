@@ -1,8 +1,54 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { resumeData } from '../resumeData';
 
-const Skills = () => {
+const Skills = ({ data }) => {
+  const expertise = (() => {
+    const raw = data?.technicalExpertise;
+    if (!raw) return {};
+
+    if (Array.isArray(raw)) {
+      return raw.reduce((acc, curr) => {
+        const category = curr?.category?.trim() || "Other";
+        const skill = curr?.skill || curr?.name || curr?.title || "";
+        if (!acc[category]) acc[category] = [];
+        if (skill && !acc[category].includes(skill)) acc[category].push(skill);
+        return acc;
+      }, {});
+    }
+
+    if (typeof raw === "object") {
+      return Object.entries(raw).reduce((acc, [key, value]) => {
+        if (Array.isArray(value)) {
+          acc[key] = value
+            .map((item) => {
+              if (typeof item === "string") return item;
+              if (item && typeof item === "object") return item.skill || item.name || item.title || "";
+              return String(item || "");
+            })
+            .filter(Boolean);
+        } else if (typeof value === "string") {
+          acc[key] = [value];
+        } else if (value && typeof value === "object") {
+          acc[key] = [value.skill || value.name || value.title || ""].filter(Boolean);
+        } else {
+          acc[key] = [];
+        }
+        return acc;
+      }, {});
+    }
+
+    return {};
+  })();
+
+  const hasExpertise = Object.keys(expertise).length > 0;
+  const hasCompetencies = data?.coreCompetencies && data.coreCompetencies.length > 0;
+  if (!hasExpertise && !hasCompetencies) return null;
+
+  const totalSkills = Object.values(expertise).reduce(
+    (acc, skills) => acc + (Array.isArray(skills) ? skills.length : 0),
+    0
+  );
+
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -89,7 +135,7 @@ const Skills = () => {
             </h2>
             <div className="h-1 w-20 bg-gradient-to-r from-cyan-400 to-blue-500" />
             <p className="text-gray-400 font-light text-lg">
-              Full-stack expertise spanning 25+ technologies across modern web and cloud architecture
+              Expertise spanning {totalSkills}+ technologies across modern architecture
             </p>
           </motion.div>
 
@@ -98,7 +144,7 @@ const Skills = () => {
             variants={containerVariants}
             className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"
           >
-            {Object.entries(resumeData.technicalExpertise).map((category, idx) => {
+            {Object.entries(expertise).map((category, idx) => {
               const config = getCategoryConfig(category[0]);
               return (
                 <motion.div
@@ -166,7 +212,7 @@ const Skills = () => {
               Core Competencies
             </h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              {resumeData.coreCompetencies.map((comp, idx) => (
+              {data.coreCompetencies?.map((comp, idx) => (
                 <motion.div
                   key={idx}
                   initial={{ opacity: 0, x: -20 }}
@@ -247,7 +293,7 @@ const Skills = () => {
                   Tech Stack Diversity
                 </h4>
                 <p className="text-gray-400 font-light">
-                  Proficient across 25+ technologies spanning frontend, backend, cloud, and DevOps
+                  Proficient across {totalSkills}+ technologies spanning multiple technical domains
                 </p>
               </div>
               <motion.div
@@ -258,7 +304,7 @@ const Skills = () => {
                 className="flex items-center justify-center"
               >
                 <div className="text-5xl font-light bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">
-                  25+
+                  {totalSkills}+
                 </div>
               </motion.div>
             </div>

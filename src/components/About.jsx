@@ -1,8 +1,9 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { resumeData } from '../resumeData';
 
-const About = () => {
+const About = ({ data }) => {
+  if (!data) return null;
+
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -24,22 +25,22 @@ const About = () => {
 
   const metrics = [
     {
-      number: resumeData.metrics.experience,
+      number: data.metrics?.experience || "0+",
       label: "Years of Experience",
       icon: "🚀",
     },
     {
-      number: resumeData.metrics.projectsDelivered,
+      number: data.metrics?.projectsDelivered || "0+",
       label: "Projects Delivered",
       icon: "✓",
     },
     {
-      number: resumeData.metrics.yearsAsSenior,
+      number: data.metrics?.yearsAsSenior || "0+",
       label: "Years as Senior Engineer",
       icon: "⭐",
     },
     {
-      number: resumeData.metrics.cloudInfraProjects,
+      number: data.metrics?.cloudInfraProjects || "0+",
       label: "Cloud Infrastructure Projects",
       icon: "☁️",
     },
@@ -73,47 +74,43 @@ const About = () => {
           {/* About Text */}
           <motion.div variants={itemVariants} className="max-w-3xl">
             <div className="space-y-6">
-              <div className="space-y-2">
-                <h3 className="text-2xl font-light text-cyan-400">
-                  What Sets Me Apart
-                </h3>
-                <p className="text-gray-300 leading-relaxed font-light">
-                  Beyond technical prowess, I bring a strategic mindset to every project. I don't just write code—I architect solutions that scale with businesses, reduce operational costs, and drive user engagement. My approach combines deep technical expertise with business acumen to deliver transformative results.
-                </p>
-              </div>
+              {(data.aboutDescription || data.summary) && (
+                <div className="space-y-2">
+                  <h3 className="text-2xl font-light text-cyan-400">
+                    What Sets Me Apart
+                  </h3>
+                  <p className="text-gray-300 leading-relaxed font-light">
+                    {data.aboutDescription || data.summary}
+                  </p>
+                </div>
+              )}
 
-              <div className="space-y-2">
-                <h3 className="text-2xl font-light text-cyan-400">
-                  Impact & Results
-                </h3>
-                <ul className="space-y-3 text-gray-300 font-light">
-                  <li className="flex items-start gap-3">
-                    <span className="text-cyan-400 mt-1">→</span>
-                    <span>Optimized system performance by <strong>30%</strong>, directly improving user satisfaction metrics and reducing infrastructure costs</span>
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <span className="text-cyan-400 mt-1">→</span>
-                    <span>Architected microservices pipelines handling high-throughput data ingestion, cutting cloud expenses and latency significantly</span>
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <span className="text-cyan-400 mt-1">→</span>
-                    <span>Led cross-functional teams to deliver <strong>15+ enterprise products</strong> with measurable business impact</span>
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <span className="text-cyan-400 mt-1">→</span>
-                    <span>Deployed AI/ML solutions that automated manual processes and enhanced decision-making capabilities</span>
-                  </li>
-                </ul>
-              </div>
+              {data.impactResults && data.impactResults.length > 0 && (
+                <div className="space-y-2">
+                  <h3 className="text-2xl font-light text-cyan-400">
+                    Impact & Results
+                  </h3>
+                  <ul className="space-y-3 text-gray-300 font-light">
+                    {data.impactResults.map((item, idx) => (
+                      <li key={idx} className="flex items-start gap-3">
+                        <span className="text-cyan-400 mt-1">→</span>
+                        <span>{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
 
-              <div className="space-y-2">
-                <h3 className="text-2xl font-light text-cyan-400">
-                  My Philosophy
-                </h3>
-                <p className="text-gray-300 leading-relaxed font-light">
-                  Excellence is not about perfection—it's about continuous improvement, learning from failures, and adapting to challenges. I believe in writing clean, maintainable code, fostering collaborative teams, and always keeping user needs at the center of solution design.
-                </p>
-              </div>
+              {data.philosophy && (
+                <div className="space-y-2">
+                  <h3 className="text-2xl font-light text-cyan-400">
+                    My Philosophy
+                  </h3>
+                  <p className="text-gray-300 leading-relaxed font-light">
+                    {data.philosophy}
+                  </p>
+                </div>
+              )}
             </div>
           </motion.div>
 
@@ -146,19 +143,13 @@ const About = () => {
           </motion.div>
 
           {/* Core Strengths */}
-          <motion.div variants={itemVariants} className="space-y-6">
-            <h3 className="text-2xl font-light text-white tracking-tight">
-              Core Strengths
-            </h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {[
-                "Full-Stack Development & Architecture",
-                "Cloud Infrastructure & DevOps",
-                "System Design & Scalability",
-                "Performance Optimization",
-                "Team Leadership & Mentoring",
-                "Agile & Rapid Prototyping",
-              ].map((strength, idx) => (
+          {data.coreStrengths && data.coreStrengths.length > 0 && (
+            <motion.div variants={itemVariants} className="space-y-6">
+              <h3 className="text-2xl font-light text-white tracking-tight">
+                Core Strengths
+              </h3>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {data.coreStrengths.map((strength, idx) => (
                 <motion.div
                   key={idx}
                   initial={{ opacity: 0, x: -20 }}
@@ -173,6 +164,7 @@ const About = () => {
               ))}
             </div>
           </motion.div>
+          )}
         </motion.div>
       </div>
     </motion.section>

@@ -1,29 +1,17 @@
 import "./App.css";
-import Header from "./components/Header";
-import Hero from "./components/Hero";
-import About from "./components/About";
-import Skills from "./components/Skills";
-import Experience from "./components/Experience";
-import Education from "./components/Education";
-import Certifications from "./components/Certifications";
-import Publications from "./components/Publications";
-import Awards from "./components/Awards";
-import Footer from "./components/Footer";
+import { Routes, Route } from "react-router-dom";
+import ProfilePage from "./pages/ProfilePage";
+import NotFoundPage from "./pages/NotFoundPage";
+import CreateProfilePage from "./pages/CreateProfilePage";
 
 function App() {
   return (
-    <div className="App">
-      <Header />
-      <Hero />
-      <About />
-      <Skills />
-      <Experience />
-      <Education />
-      <Certifications />
-      <Publications />
-      <Awards />
-      <Footer />
-    </div>
+    <Routes>
+      <Route path="/" element={<ProfilePage defaultUsername="laraib" />} />
+      <Route path="/:username" element={<ProfilePage />} />
+      <Route path="/create-profile" element={<CreateProfilePage />} />
+      <Route path="*" element={<NotFoundPage />} />
+    </Routes>
   );
 }
 
