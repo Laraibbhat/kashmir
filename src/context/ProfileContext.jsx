@@ -5,6 +5,9 @@ import { mapProfileData } from "../dataMapper";
 
 const ProfileContext = createContext();
 
+const API_BASE_URL = "https://portfolio-backend-tbur.onrender.com";
+// const API_BASE_URL = "http://localhost:8080";
+
 export const useProfile = () => useContext(ProfileContext);
 
 export const ProfileProvider = ({ children }) => {
@@ -17,13 +20,9 @@ export const ProfileProvider = ({ children }) => {
     setLoading(true);
     setError(null);
     try {
-      
-      // const response = await axios.get(
-      //   `http://localhost:8080/api/users/username/${encodeURIComponent(username)}`
-      // );
 
       const response = await axios.get(
-        `https://portfolio-backend-tbur.onrender.com/api/users/username/${encodeURIComponent(username)}`
+        `${API_BASE_URL}/api/users/username/${encodeURIComponent(username)}`
       );
 
       const apiData = response.data;
@@ -53,7 +52,7 @@ export const ProfileProvider = ({ children }) => {
     setError(null);
     try {
       const response = await axios.post(
-        `http://localhost:8080/api/users`,
+        `${API_BASE_URL}/api/users`,
         profilePayload,
         { headers: { "Content-Type": "application/json" } }
       );
