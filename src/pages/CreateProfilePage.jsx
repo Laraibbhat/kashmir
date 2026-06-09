@@ -38,7 +38,8 @@ const stepVariants = {
 };
 
 // Change this to your backend URL
-const API_BASE_URL = "http://localhost:8080";
+// const API_BASE_URL = "http://localhost:8080";
+const API_BASE_URL = "https://portfolio-backend-tbur.onrender.com";
 
 function CreateProfilePage() {
   const navigate = useNavigate();

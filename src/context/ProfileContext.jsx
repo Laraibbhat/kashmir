@@ -17,11 +17,13 @@ export const ProfileProvider = ({ children }) => {
     setLoading(true);
     setError(null);
     try {
+      
       // const response = await axios.get(
-      //   `http://localhost:8080/api/profiles/${encodeURIComponent(username)}`
+      //   `http://localhost:8080/api/users/username/${encodeURIComponent(username)}`
       // );
+
       const response = await axios.get(
-        `http://localhost:8080/api/users/username/${encodeURIComponent(username)}`
+        `https://portfolio-backend-tbur.onrender.com/api/users/username/${encodeURIComponent(username)}`
       );
 
       const apiData = response.data;
