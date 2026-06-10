@@ -89,8 +89,20 @@ const Skills = ({ data }) => {
         lightGradient: "from-blue-500/10 to-cyan-500/10",
         borderGradient: "from-blue-500 to-cyan-400",
       },
+      "Languages & Methods": {
+        icon: "📊",
+        gradient: "from-blue-600 to-cyan-500",
+        lightGradient: "from-blue-500/10 to-cyan-500/10",
+        borderGradient: "from-blue-500 to-cyan-400",
+      },
       "Frameworks & Libs": {
         icon: "🛠️",
+        gradient: "from-cyan-600 to-emerald-500",
+        lightGradient: "from-cyan-500/10 to-emerald-500/10",
+        borderGradient: "from-cyan-500 to-emerald-400",
+      },
+      "Tools & Platforms": {
+        icon: "💻",
         gradient: "from-cyan-600 to-emerald-500",
         lightGradient: "from-cyan-500/10 to-emerald-500/10",
         borderGradient: "from-cyan-500 to-emerald-400",
@@ -107,8 +119,20 @@ const Skills = ({ data }) => {
         lightGradient: "from-orange-500/10 to-pink-500/10",
         borderGradient: "from-orange-500 to-pink-400",
       },
+      "Business Skills": {
+        icon: "📈",
+        gradient: "from-green-600 to-teal-500",
+        lightGradient: "from-green-500/10 to-teal-500/10",
+        borderGradient: "from-green-500 to-teal-400",
+      },
     };
-    return configs[category] || configs["Languages & Core"];
+    // Return a default config for unknown categories
+    return configs[category] || {
+      icon: "💡",
+      gradient: "from-indigo-600 to-blue-500",
+      lightGradient: "from-indigo-500/10 to-blue-500/10",
+      borderGradient: "from-indigo-500 to-blue-400",
+    };
   };
 
   return (
