@@ -31,18 +31,18 @@ const About = ({ data }) => {
     },
     {
       number: data.metrics?.projectsDelivered || "0+",
-      label: "Projects Delivered",
+      label: "Projects/Initiatives",
       icon: "✓",
     },
     {
       number: data.metrics?.yearsAsSenior || "0+",
-      label: "Years as Senior Engineer",
+      label: "Years at Senior Level",
       icon: "⭐",
     },
     {
       number: data.metrics?.cloudInfraProjects || "0+",
-      label: "Cloud Infrastructure Projects",
-      icon: "☁️",
+      label: "Major Initiatives",
+      icon: "🚀",
     },
   ];
 

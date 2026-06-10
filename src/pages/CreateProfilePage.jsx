@@ -24,14 +24,14 @@ const steps = [
     icon: "👤",
   },
   {
-    title: "Experience Metrics",
-    description: "Showcase your career impact with measurable values.",
+    title: "Career Highlights",
+    description: "Showcase your career impact with measurable achievements.",
     icon: "📊",
   },
   {
-    title: "Technical Expertise",
-    description: "Add the skills that define your technical profile.",
-    icon: "⚙️",
+    title: "Skills & Expertise",
+    description: "Add the skills that define your professional profile. (Optional)",
+    icon: "💡",
   },
   {
     title: "Professional Experience",
@@ -45,7 +45,7 @@ const steps = [
   },
   {
     title: "Final Details",
-    description: "Wrap up with certifications, publications, awards, and competencies.",
+    description: "Wrap up with certifications, publications, awards, and strengths.",
     icon: "⭐",
   },
 ];
@@ -257,14 +257,11 @@ function CreateProfilePage() {
     }
 
     if (step === 2) {
-      if (formData.technicalExpertise.length === 0) {
-        setValidationError("Add at least one technical expertise entry.");
-        return false;
-      }
+      // Skills & Expertise is optional, only validate if entries exist
       for (let i = 0; i < formData.technicalExpertise.length; i += 1) {
         const item = formData.technicalExpertise[i];
         if (!item.category?.trim() || !item.skill?.trim()) {
-          setValidationError(`Expertise #${i + 1} needs category and skill.`);
+          setValidationError(`Skill #${i + 1} needs category and skill name.`);
           return false;
         }
       }
@@ -447,7 +444,7 @@ function CreateProfilePage() {
                   name="title"
                   value={formData.title}
                   onChange={(e) => setFieldValue("title", e.target.value)}
-                  placeholder="e.g. Senior Software Engineer"
+                  placeholder="e.g. Marketing Manager, Consultant, Designer"
                   className="w-full px-4 py-3 rounded-xl bg-slate-800 border border-slate-700 text-white placeholder-slate-500 focus:ring-2 focus:ring-cyan-500 focus:border-transparent focus:bg-slate-800/80 transition-all duration-200"
                 />
               </motion.label>
@@ -496,7 +493,7 @@ function CreateProfilePage() {
                 value={formData.summary}
                 onChange={(e) => setFieldValue("summary", e.target.value)}
                 rows="5"
-                placeholder="Tell your professional story. Highlight your key achievements and what drives your career..."
+                placeholder="Share your professional story. Highlight your key achievements, expertise, and what drives your career..."
                 className="w-full px-4 py-3 rounded-xl bg-slate-800 border border-slate-700 text-white placeholder-slate-500 focus:ring-2 focus:ring-cyan-500 focus:border-transparent focus:bg-slate-800/80 transition-all duration-200 resize-none"
               />
             </motion.label>
@@ -509,7 +506,7 @@ function CreateProfilePage() {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               <motion.label variants={itemVariants} className="group space-y-2">
                 <span className="text-sm font-semibold text-slate-300 group-focus-within:text-cyan-400 transition flex items-center gap-2">
-                  <span>📅</span> Years Experience
+                  <span>📅</span> Years of Experience
                 </span>
                 <input
                   type="number"
@@ -522,7 +519,7 @@ function CreateProfilePage() {
               </motion.label>
               <motion.label variants={itemVariants} className="group space-y-2">
                 <span className="text-sm font-semibold text-slate-300 group-focus-within:text-cyan-400 transition flex items-center gap-2">
-                  <span>⭐</span> Years as Senior
+                  <span>⭐</span> Years at Senior Level
                 </span>
                 <input
                   type="number"
@@ -535,7 +532,7 @@ function CreateProfilePage() {
               </motion.label>
               <motion.label variants={itemVariants} className="group space-y-2">
                 <span className="text-sm font-semibold text-slate-300 group-focus-within:text-cyan-400 transition flex items-center gap-2">
-                  <span>✅</span> Projects Delivered
+                  <span>✅</span> Projects/Initiatives
                 </span>
                 <input
                   type="number"
@@ -550,7 +547,7 @@ function CreateProfilePage() {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               <motion.label variants={itemVariants} className="group space-y-2">
                 <span className="text-sm font-semibold text-slate-300 group-focus-within:text-cyan-400 transition flex items-center gap-2">
-                  <span>☁️</span> Cloud Infra Projects
+                  <span>🚀</span> Major Initiatives
                 </span>
                 <input
                   type="number"
@@ -562,7 +559,7 @@ function CreateProfilePage() {
               </motion.label>
               <motion.label variants={itemVariants} className="group space-y-2">
                 <span className="text-sm font-semibold text-slate-300 group-focus-within:text-cyan-400 transition flex items-center gap-2">
-                  <span>👥</span> Teams Managed
+                  <span>👥</span> Team Members Led
                 </span>
                 <input
                   type="number"
@@ -574,7 +571,7 @@ function CreateProfilePage() {
               </motion.label>
               <motion.label variants={itemVariants} className="group space-y-2">
                 <span className="text-sm font-semibold text-slate-300 group-focus-within:text-cyan-400 transition flex items-center gap-2">
-                  <span>⚡</span> Optimization %
+                  <span>⚡</span> Impact/Improvement %
                 </span>
                 <input
                   type="number"
@@ -600,22 +597,22 @@ function CreateProfilePage() {
                   className="grid grid-cols-1 md:grid-cols-3 gap-4 items-end p-5 rounded-xl bg-gradient-to-br from-slate-800 to-slate-900 border border-slate-700 hover:border-cyan-500/50 transition-all duration-300 shadow-lg shadow-slate-950/20"
                 >
                   <label className="space-y-2 group">
-                    <span className="text-sm font-semibold text-slate-300 group-focus-within:text-cyan-400 transition">Category</span>
+                    <span className="text-sm font-semibold text-slate-300 group-focus-within:text-cyan-400 transition">Skill Category</span>
                     <input
                       type="text"
                       value={item.category}
                       onChange={(e) => updateListItem("technicalExpertise", index, "category", e.target.value)}
-                      placeholder="e.g. Programming Languages"
+                      placeholder="e.g. Languages, Tools, Frameworks, Methods"
                       className="w-full px-4 py-2.5 rounded-lg bg-slate-950 border border-slate-700 text-white text-sm focus:ring-2 focus:ring-cyan-500 transition-all duration-200"
                     />
                   </label>
                   <label className="space-y-2 group">
-                    <span className="text-sm font-semibold text-slate-300 group-focus-within:text-cyan-400 transition">Skill</span>
+                    <span className="text-sm font-semibold text-slate-300 group-focus-within:text-cyan-400 transition">Skill Name</span>
                     <input
                       type="text"
                       value={item.skill}
                       onChange={(e) => updateListItem("technicalExpertise", index, "skill", e.target.value)}
-                      placeholder="e.g. Java, Python, TypeScript"
+                      placeholder="e.g. Project Management, Leadership, Design"
                       className="w-full px-4 py-2.5 rounded-lg bg-slate-950 border border-slate-700 text-white text-sm focus:ring-2 focus:ring-cyan-500 transition-all duration-200"
                     />
                   </label>
@@ -638,7 +635,7 @@ function CreateProfilePage() {
               whileTap={{ scale: 0.95 }}
               className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-gradient-to-r from-cyan-500 to-blue-500 text-slate-950 font-semibold shadow-lg shadow-cyan-500/30 hover:shadow-cyan-500/50 transition-all duration-300"
             >
-              <span className="text-lg">+</span> Add Expertise
+              <span className="text-lg">+</span> Add Skill
             </motion.button>
           </motion.div>
         );
@@ -664,17 +661,17 @@ function CreateProfilePage() {
                       type="text"
                       value={exp.title}
                       onChange={(e) => updateListItem("experiences", index, "title", e.target.value)}
-                      placeholder="Senior Software Engineer"
+                      placeholder="Your Job Title"
                       className="w-full px-4 py-2.5 rounded-lg bg-slate-950 border border-slate-700 text-white text-sm focus:ring-2 focus:ring-cyan-500 transition-all duration-200"
                     />
                   </label>
                   <label className="space-y-2 group">
-                    <span className="text-sm font-semibold text-slate-300 group-focus-within:text-cyan-400 transition">Company *</span>
+                    <span className="text-sm font-semibold text-slate-300 group-focus-within:text-cyan-400 transition">Organization *</span>
                     <input
                       type="text"
                       value={exp.company}
                       onChange={(e) => updateListItem("experiences", index, "company", e.target.value)}
-                      placeholder="Tech Company Inc."
+                      placeholder="Company or Organization Name"
                       className="w-full px-4 py-2.5 rounded-lg bg-slate-950 border border-slate-700 text-white text-sm focus:ring-2 focus:ring-cyan-500 transition-all duration-200"
                     />
                   </label>
@@ -697,7 +694,7 @@ function CreateProfilePage() {
                       type="text"
                       value={exp.projectFocus}
                       onChange={(e) => updateListItem("experiences", index, "projectFocus", e.target.value)}
-                      placeholder="Led microservices development..."
+                      placeholder="Key focus or project (optional)"
                       className="w-full px-4 py-2.5 rounded-lg bg-slate-950 border border-slate-700 text-white text-sm focus:ring-2 focus:ring-cyan-500 transition-all duration-200"
                     />
                   </label>
@@ -737,7 +734,7 @@ function CreateProfilePage() {
                           );
                           updateListItem("experiences", index, "highlights", nextHighlights);
                         }}
-                        placeholder="Implemented new payment gateway..."
+                        placeholder="Key achievement or responsibility..."
                         className="w-full px-4 py-2.5 rounded-lg bg-slate-950 border border-slate-700 text-white text-sm focus:ring-2 focus:ring-cyan-500 transition-all duration-200"
                       />
                       <motion.button
@@ -811,7 +808,7 @@ function CreateProfilePage() {
                       type="text"
                       value={edu.degree}
                       onChange={(e) => updateListItem("education", index, "degree", e.target.value)}
-                      placeholder="Master of Science in Computer Science"
+                      placeholder="e.g. Bachelor of Science, MBA, Diploma"
                       className="w-full px-4 py-2.5 rounded-lg bg-slate-950 border border-slate-700 text-white text-sm focus:ring-2 focus:ring-cyan-500 transition-all duration-200"
                     />
                   </label>
@@ -821,7 +818,7 @@ function CreateProfilePage() {
                       type="text"
                       value={edu.school}
                       onChange={(e) => updateListItem("education", index, "school", e.target.value)}
-                      placeholder="University of Technology"
+                      placeholder="Name of Institution"
                       className="w-full px-4 py-2.5 rounded-lg bg-slate-950 border border-slate-700 text-white text-sm focus:ring-2 focus:ring-cyan-500 transition-all duration-200"
                     />
                   </label>
@@ -844,7 +841,7 @@ function CreateProfilePage() {
                       type="text"
                       value={edu.details}
                       onChange={(e) => updateListItem("education", index, "details", e.target.value)}
-                      placeholder="Distributed Systems & Cloud Computing"
+                      placeholder="e.g. Specialization or Major (optional)"
                       className="w-full px-4 py-2.5 rounded-lg bg-slate-950 border border-slate-700 text-white text-sm focus:ring-2 focus:ring-cyan-500 transition-all duration-200"
                     />
                   </label>
@@ -882,7 +879,7 @@ function CreateProfilePage() {
                           );
                           updateListItem("education", index, "achievements", nextAchievements);
                         }}
-                        placeholder="Graduated with honors • GPA 3.9"
+                        placeholder="e.g. Honors, Awards, Notable Projects"
                         className="w-full px-4 py-2.5 rounded-lg bg-slate-950 border border-slate-700 text-white text-sm focus:ring-2 focus:ring-cyan-500 transition-all duration-200"
                       />
                       <motion.button
@@ -1138,11 +1135,11 @@ function CreateProfilePage() {
                 </motion.button>
               </motion.section>
 
-              {/* Core Competencies */}
+              {/* Core Strengths */}
               <motion.section variants={itemVariants} className="space-y-4 p-6 rounded-xl bg-gradient-to-br from-slate-800 to-slate-900 border border-slate-700 hover:border-cyan-500/50 transition-all duration-300">
                 <div className="flex items-center justify-between gap-4">
                   <h3 className="text-lg font-semibold text-cyan-400 flex items-center gap-2">
-                    <span>⚡</span> Core Competencies
+                    <span>💪</span> Core Strengths
                   </h3>
                   <span className="text-sm text-slate-500">({formData.coreCompetencies?.length || 0})</span>
                 </div>
@@ -1159,7 +1156,7 @@ function CreateProfilePage() {
                         type="text"
                         value={competency.skill}
                         onChange={(e) => updateListItem("coreCompetencies", index, "skill", e.target.value)}
-                        placeholder="e.g. System Design"
+                        placeholder="e.g. Leadership, Communication, Strategy"
                         className="w-full px-4 py-2.5 rounded-lg bg-slate-900 border border-slate-700 text-white text-sm focus:ring-2 focus:ring-cyan-500 transition-all duration-200"
                       />
                       <input
