@@ -48,7 +48,16 @@ code {
 /* Selection styling */
 ::selection {
   background: linear-gradient(90deg, #06b6d4 0%, #0ea5e9 100%);
-  color: #0f172a;
+  color: #ffffff;
+  text-shadow: 0 0 2px rgba(0, 0, 0, 0.3);
+}
+
+/* For input fields */
+input::selection,
+textarea::selection {
+  background: linear-gradient(90deg, #06b6d4 0%, #0ea5e9 100%);
+  color: #ffffff;
+  font-weight: 500;
 }
 
 /* Smooth animations */
